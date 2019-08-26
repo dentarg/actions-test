@@ -1,0 +1,53 @@
+name: Ruby
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        run: echo "$MATRIX_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Echo MEMCACHIER_SERVERS
+        run: echo "$MEMCACHIER_SERVERS"
+      - name: Echo RABBITMQ_PORT
+        run: echo "$RABBITMQ_PORT"
+      env:
+        # get randomly assigned published ports
+        MEMCACHIER_SERVERS: "localhost:${{ job.services.memcached.ports[11211] }}"
+        RABBITMQ_PORT: ${{ job.services.rabbitmq.ports[5672] }}
+    services:
+      memcached:
+        image: memcached:latest
+        ports:
+        - 11211/udp
+        # needed because the memcached container does not provide a healthcheck
+        options: --health-cmd "timeout 5 bash -c 'cat < /dev/null > /dev/udp/127.0.0.1/11211'" --health-interval 10s --health-timeout 5s --health-retries 5
+      rabbitmq:
+        image: rabbitmq:latest
+        ports:
+        - 5672/tcp
+        # needed because the rabbitmq container does not provide a healthcheck
+        options: --health-cmd "rabbitmqctl node_health_check" --health-interval 10s --health-timeout 5s --health-retries 5
