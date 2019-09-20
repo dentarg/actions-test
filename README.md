@@ -1,3 +1,4 @@
 # actions-test
 
 foo
+bar
