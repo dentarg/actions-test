@@ -34,10 +34,6 @@ jobs:
         run: echo "$MEMCACHIER_SERVERS"
       - name: Echo RABBITMQ_PORT
         run: echo "$RABBITMQ_PORT"
-      env:
-        # get randomly assigned published ports
-        MEMCACHIER_SERVERS: "localhost:${{ job.services.memcached.ports[11211] }}"
-        RABBITMQ_PORT: ${{ job.services.rabbitmq.ports[5672] }}
     services:
       memcached:
         image: memcached:latest
