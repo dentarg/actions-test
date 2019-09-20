@@ -32,8 +32,14 @@ jobs:
         run: echo "$STEPS_CONTEXT"
       - name: Echo MEMCACHIER_SERVERS
         run: echo "$MEMCACHIER_SERVERS"
+        env:
+          # get randomly assigned published ports
+          MEMCACHIER_SERVERS: "localhost:${{ job.services.memcached.ports[11211] }}"
       - name: Echo RABBITMQ_PORT
         run: echo "$RABBITMQ_PORT"
+        env:
+          # get randomly assigned published ports
+          RABBITMQ_PORT: ${{ job.services.rabbitmq.ports[5672] }}
     services:
       memcached:
         image: memcached:latest
