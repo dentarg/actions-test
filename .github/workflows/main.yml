@@ -10,7 +10,7 @@ jobs:
         uses: ./.github/actions/my-action
         with:
           foo: "Hello World"
-        run: ruby -e 'p RUBY_VERSION; p ENV["INPUT_FOO"]'
+        #run: ruby -e 'p RUBY_VERSION; p ENV["INPUT_FOO"]'
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
