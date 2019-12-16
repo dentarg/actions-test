@@ -1,0 +1,14 @@
+name: action test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Action step
+        uses: ./.github/actions/my-action
+        with:
+          foo: "Hello World"
+        #run: ruby -e 'p RUBY_VERSION; p ENV["INPUT_FOO"]'
