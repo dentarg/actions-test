@@ -1,4 +1,4 @@
-name: Postgres Service Example
+name: Ruby (Docker) + Postgres
 
 on:
   push:
