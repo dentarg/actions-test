@@ -26,7 +26,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - run: bundle install
+
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+
+    - run: |
+        bundle config path vendor/bundle
+        bundle install
+
     - run: bundle exec ruby postgres.rb
       env:
         # use postgres for the host here because we have specified a container for the job.
@@ -55,8 +66,17 @@ jobs:
       with:
         ruby-version: 2.6.x
 
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+
     - run: sudo apt-get install -y postgresql libpq-dev
-    - run: bundle install
+    - run: |
+        bundle config path vendor/bundle
+        bundle install
     - run: bundle exec ruby postgres.rb
       env:
         # use postgres for the host here because we have specified a container for the job.
