@@ -51,6 +51,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+    - run: gem install --force bundler --version '< 2'
     - run: bundle install
     - run: bundle exec ruby postgres.rb
       env:
