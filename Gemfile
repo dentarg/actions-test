@@ -8,8 +8,8 @@ gem "sequel"
 gem "pg"
 
 # make bundle install take some time
-gem "rails"
-gem "nokogiri"
-gem "pry"
-gem "bunny"
-gem "rubocop"
+# gem "rails"
+# gem "nokogiri"
+# gem "pry"
+# gem "bunny"
+# gem "rubocop"
