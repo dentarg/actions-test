@@ -4,8 +4,9 @@ source "https://rubygems.org"
 
 git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
 
-gem "sequel"
 gem "pg"
+gem "rack"
+gem "sequel"
 
 # make bundle install take some time
 # gem "rails"
