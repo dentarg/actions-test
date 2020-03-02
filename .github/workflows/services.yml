@@ -1,0 +1,31 @@
+name: memcached and rabbitmq
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo MEMCACHIER_SERVERS
+        run: echo "$MEMCACHIER_SERVERS"
+        env:
+          # get randomly assigned published ports
+          MEMCACHIER_SERVERS: "localhost:${{ job.services.memcached.ports[11211] }}"
+      - name: Echo RABBITMQ_PORT
+        run: echo "$RABBITMQ_PORT"
+        env:
+          # get randomly assigned published ports
+          RABBITMQ_PORT: ${{ job.services.rabbitmq.ports[5672] }}
+    services:
+      memcached:
+        image: memcached:latest
+        ports:
+        - 11211/udp
+        # needed because the memcached container does not provide a healthcheck
+        options: --health-cmd "timeout 5 bash -c 'cat < /dev/null > /dev/udp/127.0.0.1/11211'" --health-interval 10s --health-timeout 5s --health-retries 5
+      rabbitmq:
+        image: rabbitmq:latest
+        ports:
+        - 5672/tcp
+        # needed because the rabbitmq container does not provide a healthcheck
+        options: --health-cmd "rabbitmqctl node_health_check" --health-interval 10s --health-timeout 5s --health-retries 5

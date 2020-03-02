@@ -1,0 +1,25 @@
+name: Update bundler vendor/cache
+
+on:
+  push:
+    branches:
+      - 'dependabot/bundler/**'
+    paths:
+      - 'Gemfile.lock'
+
+jobs:
+  update-gems:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+      - run: bundle install
+      - name: Commit
+        run: |
+          git config --local user.email `git show -s --format='%ae'`
+          git config --local user.name ${GITHUB_ACTOR}
+          git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+          git add .
+          git commit --amend --no-edit
+          git push --force github HEAD:${GITHUB_REF}
