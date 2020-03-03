@@ -21,5 +21,5 @@ jobs:
           git config --local user.name ${GITHUB_ACTOR}
           git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
           git add .
-          git commit --amend --no-edit
-          git push --force github HEAD:${GITHUB_REF}
+          git commit -m "`git log --oneline --format=%B -n 1 HEAD | head -n 1` - add gem packages"
+          git push github HEAD:${GITHUB_REF}
