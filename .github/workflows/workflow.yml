@@ -23,3 +23,8 @@ jobs:
         env:
           CONTAINS_COMMIT_MSG: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
         run: echo "$CONTAINS_COMMIT_MSG"
+
+      - name: "!contains(github.event.pull_request.title, '[ci skip]') || !contains(github.event.head_commit.message, '[ci skip]')"
+        env:
+          BOTH: ${{ !contains(github.event.pull_request.title, '[ci skip]') || !contains(github.event.head_commit.message, '[ci skip]') }}
+        run: echo "$BOTH"
