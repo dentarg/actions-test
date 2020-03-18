@@ -6,7 +6,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     if: |
-      !(contains(github.event.pull_request.title, '[ci skip]') || contains(github.event.head_commit.message, '[ci skip]'))
+      !(contains(github.event.pull_request.title, '[ci skip]')
+        || contains(github.event.head_commit.message, '[ci skip]'))
     steps:
 
       - name: github.event.pull_request.title
