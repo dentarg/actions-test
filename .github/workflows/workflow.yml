@@ -1,6 +1,6 @@
-name: PR github context
+name: The Workflow
 
-on: [pull_request]
+on: [push, pull_request]
 
 jobs:
   build:
