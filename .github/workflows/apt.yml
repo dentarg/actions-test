@@ -22,7 +22,7 @@ jobs:
     - run: ls -ahl /etc/apt/apt.conf.d/
       if: always()
 
-    - run: sudo echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries
+    - run: echo "APT::Acquire::Retries \"3\";" | sudo tee /etc/apt/apt.conf.d/80-retries
       if: always()
 
     - run: apt-get update
