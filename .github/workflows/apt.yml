@@ -25,5 +25,5 @@ jobs:
     - run: echo "APT::Acquire::Retries \"3\";" | sudo tee /etc/apt/apt.conf.d/80-retries
       if: always()
 
-    - run: apt-get update
+    - run: sudo apt-get update
       if: always()
