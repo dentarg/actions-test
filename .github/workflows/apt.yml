@@ -1,0 +1,12 @@
+name: apt
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - run: cat /etc/apt/apt.conf.d/80-retries
+    - run: echo "APT::Acquire::Retries \"3\";" > /etc/apt/apt.conf.d/80-retries
+    - run: apt-get update
