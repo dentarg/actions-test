@@ -10,17 +10,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu ]
+        os: [ ubuntu, windows ]
         include:
           - { os: macos, allow-failure: true }
 
     steps:
       - uses: actions/checkout@v2
 
-      - id: test
+      - name: test
+        id: test
         run: test $(uname) = Linux
         continue-on-error: ${{ matrix.allow-failure || false }}
 
       - name: >-
-          outcome: ${{ steps.test.outcome }} conclusion: ${{ steps.test.conclusion }}
-        run: echo hi
+          Test outcome: ${{ steps.test.outcome }}
+        run: echo NOOP
