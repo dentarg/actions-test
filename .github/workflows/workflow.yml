@@ -4,28 +4,23 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    if: |
-      !(contains(github.event.pull_request.title, '[ci skip]')
-        || contains(github.event.head_commit.message, '[ci skip]'))
+    name: >-
+      ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ubuntu
+        include:
+          - { os: macos, allow-failure: true }
+
+    continue-on-error: ${{ matrix.allow-failure || false }}
     steps:
+      - uses: actions/checkout@v2
 
-      - name: github.event.pull_request.title
-        env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
-        run: echo "$PR_TITLE"
+      - id: test
+        run: test $(uname) = Linux
 
-      - name: github.event.head_commit.message
-        env:
-          COMMIT_MSG: ${{ github.event.head_commit.message }}
-        run: echo "$COMMIT_MSG"
-
-      - name: "!contains(github.event.head_commit.message, '[ci skip]')"
-        env:
-          CONTAINS_COMMIT_MSG: ${{ !contains(github.event.head_commit.message, '[ci skip]') }}
-        run: echo "$CONTAINS_COMMIT_MSG"
-
-      - name: "!(contains(github.event.pull_request.title, '[ci skip]') || contains(github.event.head_commit.message, '[ci skip]'))"
-        env:
-          BOTH: ${{ !(contains(github.event.pull_request.title, '[ci skip]') || contains(github.event.head_commit.message, '[ci skip]')) }}
-        run: echo "$BOTH"
+      - name: >-
+          outcome: ${{ steps.test.outcome }} conclusion: ${{ steps.test.conclusion }}
+        if: ${{ steps.test.conclusion }}
