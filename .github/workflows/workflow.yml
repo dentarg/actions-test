@@ -14,14 +14,13 @@ jobs:
         include:
           - { os: macos, allow-failure: true }
 
-    continue-on-error: ${{ matrix.allow-failure || false }}
     steps:
       - uses: actions/checkout@v2
 
       - id: test
         run: test $(uname) = Linux
+        continue-on-error: ${{ matrix.allow-failure || false }}
 
       - name: >-
           outcome: ${{ steps.test.outcome }} conclusion: ${{ steps.test.conclusion }}
-        if: ${{ steps.test.conclusion }}
         run: echo hi
