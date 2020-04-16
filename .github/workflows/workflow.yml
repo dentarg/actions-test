@@ -24,3 +24,4 @@ jobs:
       - name: >-
           outcome: ${{ steps.test.outcome }} conclusion: ${{ steps.test.conclusion }}
         if: ${{ steps.test.conclusion }}
+        run: echo hi
