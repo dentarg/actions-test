@@ -7,15 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: cat $GITHUB_EVENT_PATH
-        run: cat $GITHUB_EVENT_PATH
 
-      - name: Echo GITHUB_RUN_ID
-        run: echo "$GITHUB_RUN_ID"
-
-      - name: Echo GITHUB_JOB
-        run: echo "$GITHUB_JOB"
-
+      - run: echo "$GITHUB_JOB"
+      - run: echo "$GITHUB_ACTION"
+      - run: echo "$GITHUB_RUN_ID"
+      - run: echo "$GITHUB_REF"
+      - run: echo "$GITHUB_REPOSITORY"
+      - run: echo "$GITHUB_SHA"
+      - run: echo "$GITHUB_HEAD_REF"
+      
+      - run: cat $GITHUB_EVENT_PATH
+        
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
