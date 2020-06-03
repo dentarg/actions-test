@@ -10,6 +10,9 @@ jobs:
       - name: cat $GITHUB_EVENT_PATH
         run: cat $GITHUB_EVENT_PATH
 
+      - name: Echo GITHUB_RUN_ID
+        run: echo "$GITHUB_RUN_ID"
+
       - name: Echo GITHUB_JOB
         run: echo "$GITHUB_JOB"
 
