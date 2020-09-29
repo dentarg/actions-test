@@ -9,7 +9,7 @@ gem "pg"
 
 # make bundle install take some time
 # gem "rails"
-gem "nokogiri"
+# gem "nokogiri"
 # gem "pry"
 # gem "bunny"
 # gem "rubocop"

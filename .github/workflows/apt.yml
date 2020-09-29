@@ -2,6 +2,8 @@ name: apt
 
 on:
   push:
+    paths:
+    - '.github/workflows/apt.yml'
 
 jobs:
   build:

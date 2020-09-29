@@ -1,0 +1,27 @@
+name: RabbitMQ
+
+on:
+  push:
+    paths:
+    - '.github/workflows/rabbitmq.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo RABBITMQ_PORT
+        run: echo "$RABBITMQ_PORT"
+        env:
+          # get randomly assigned published ports
+          RABBITMQ_PORT: ${{ job.services.rabbitmq.ports[5672] }}
+    services:
+      rabbitmq:
+        image: rabbitmq:latest
+        ports:
+        - 5672/tcp
+        # needed because the rabbitmq container does not provide a healthcheck
+        options: >-
+          --health-cmd "rabbitmqctl node_health_check"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5

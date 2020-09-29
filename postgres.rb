@@ -3,12 +3,15 @@ $stderr.sync = true
 
 require "sequel"
 
-user = "postgres"
-pass = "postgres"
-host = ENV.fetch("POSTGRES_HOST")
-port = ENV.fetch("POSTGRES_PORT")
-db   = "postgres"
-
-url = "postgres://#{user}:#{pass}@#{host}:#{port}/#{db}"
+url = if ENV.has_key?("POSTGRES_URL")
+        ENV.fetch("POSTGRES_URL")
+      else
+        user = "postgres"
+        pass = "postgres"
+        host = ENV.fetch("POSTGRES_HOST")
+        port = ENV.fetch("POSTGRES_PORT")
+        db   = "postgres"
+        "postgres://#{user}:#{pass}@#{host}:#{port}/#{db}"
+      end
 
 Sequel.connect(url)
