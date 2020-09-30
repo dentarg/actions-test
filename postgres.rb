@@ -16,6 +16,7 @@ url = if ENV.has_key?("POSTGRES_URL")
 
 DB = Sequel.connect(url)
 
+# test
 DB.run('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
 
 DB.create_table :items do
