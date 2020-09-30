@@ -81,10 +81,16 @@ jobs:
     - uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
-    - run: |
+    - name: Setup postgres
+      run: |
         sudo systemctl start postgresql.service
         sudo -u postgres createuser --createdb ${USER}
         createdb ${USER}
+    - name: Setup postgres dependencies
+      run: |
+        psql -d template1 -c 'CREATE EXTENSION "hstore";'
+        psql -d template1 -c 'CREATE EXTENSION "uuid-ossp";'
+        psql -d template1 -c 'CREATE EXTENSION "pgcrypto";'
     - run: bundle exec ruby postgres.rb
       env:
         # use "local socket"
