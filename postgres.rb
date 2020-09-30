@@ -16,6 +16,8 @@ url = if ENV.has_key?("POSTGRES_URL")
 
 DB = Sequel.connect(url)
 
+DB.run('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
+
 DB.create_table :items do
   primary_key :id
   column :uuid, :uuid, default: Sequel.function(:uuid_generate_v4)
