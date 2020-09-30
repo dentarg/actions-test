@@ -18,6 +18,7 @@ DB = Sequel.connect(url)
 
 DB.create_table :items do
   primary_key :id
+  column :uuid, :uuid, default: Sequel.function(:uuid_generate_v4)
   String :name
   Float :price
 end
