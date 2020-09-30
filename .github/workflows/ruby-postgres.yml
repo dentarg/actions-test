@@ -85,12 +85,10 @@ jobs:
       run: |
         sudo systemctl start postgresql.service
         sudo -u postgres createuser --createdb ${USER}
-        createdb ${USER}
-    - name: Setup postgres dependencies
-      run: |
         sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "hstore";'
         sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "uuid-ossp";'
         sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "pgcrypto";'
+        createdb ${USER}
     - run: bundle exec ruby postgres.rb
       env:
         # use "local socket"
