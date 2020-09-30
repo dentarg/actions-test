@@ -88,9 +88,9 @@ jobs:
         createdb ${USER}
     - name: Setup postgres dependencies
       run: |
-        psql -d template1 -c 'CREATE EXTENSION "hstore";'
-        psql -d template1 -c 'CREATE EXTENSION "uuid-ossp";'
-        psql -d template1 -c 'CREATE EXTENSION "pgcrypto";'
+        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "hstore";'
+        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "uuid-ossp";'
+        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "pgcrypto";'
     - run: bundle exec ruby postgres.rb
       env:
         # use "local socket"
