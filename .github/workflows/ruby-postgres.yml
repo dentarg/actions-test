@@ -115,7 +115,7 @@ jobs:
   vm-job-vm-db-action:
     runs-on: ubuntu-latest
     steps:
-    - uses: dentarg/postgres@master
+    - uses: dentarg/postgres@main
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
