@@ -6,11 +6,12 @@ require "sequel"
 url = if ENV.has_key?("POSTGRES_URL")
         ENV.fetch("POSTGRES_URL")
       else
-        user = "postgres"
-        pass = "postgres"
+        user = ENV.fetch("POSTGRES_USER", "postgres")
+        pass = ENV.fetch("POSTGRES_PASS", "postgres")
         host = ENV.fetch("POSTGRES_HOST")
-        port = ENV.fetch("POSTGRES_PORT")
-        db   = "postgres"
+        port = ENV.fetch("POSTGRES_PORT", 5432)
+        db   = ENV.fetch("POSTGRES_DB", "postgres")
+
         "postgres://#{user}:#{pass}@#{host}:#{port}/#{db}"
       end
 

@@ -94,6 +94,24 @@ jobs:
         # use "local socket"
         POSTGRES_URL: "postgres:///${{ env.USER }}"
 
+  vm-job-vm-db-tcp:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Setup postgres
+      run: |
+        cat /etc/postgresql/12/main/pg_hba.conf
+        sudo sed -i s/md5/trust/g /etc/postgresql/12/main/pg_hba.conf
+        sudo systemctl start postgresql.service
+        sudo -u postgres createuser --createdb ${USER}
+        createdb ${USER}
+    - run: bundle exec ruby postgres.rb
+      env:
+        POSTGRES_URL: "postgres://localhost/${{ env.USER }}"
+
   vm-job-vm-db-action:
     runs-on: ubuntu-latest
     steps:
