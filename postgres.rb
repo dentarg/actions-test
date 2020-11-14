@@ -18,7 +18,7 @@ url = if ENV.has_key?("POSTGRES_URL")
 DB = Sequel.connect(url)
 
 # 'CREATE EXTENSION IF NOT EXISTS "hstore";'
-DB.extension :pg_hstore
+# DB.extension :pg_hstore
 
 # test
 DB.run('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')

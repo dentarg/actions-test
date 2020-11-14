@@ -86,8 +86,6 @@ jobs:
         sudo systemctl start postgresql.service
         sudo -u postgres createuser --createdb ${USER}
         sudo -u postgres psql -d template1 -c 'CREATE EXTENSION IF NOT EXISTS "hstore";'
-        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
-        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION IF NOT EXISTS "pgcrypto";'
         createdb ${USER}
     - run: bundle exec ruby postgres.rb
       env:
@@ -107,6 +105,7 @@ jobs:
         sudo sed -i s/md5/trust/g /etc/postgresql/*/main/pg_hba.conf
         sudo systemctl start postgresql.service
         sudo -u postgres createuser --createdb --superuser ${USER}
+        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION IF NOT EXISTS "hstore";'
         createdb mytestdb
     - run: bundle exec ruby postgres.rb
       env:
