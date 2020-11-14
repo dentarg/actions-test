@@ -85,9 +85,9 @@ jobs:
       run: |
         sudo systemctl start postgresql.service
         sudo -u postgres createuser --createdb ${USER}
-        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "hstore";'
-        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "uuid-ossp";'
-        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION "pgcrypto";'
+        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION IF NOT EXISTS "hstore";'
+        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+        sudo -u postgres psql -d template1 -c 'CREATE EXTENSION IF NOT EXISTS "pgcrypto";'
         createdb ${USER}
     - run: bundle exec ruby postgres.rb
       env:
