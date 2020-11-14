@@ -15,9 +15,12 @@ jobs:
       - run: echo "$GITHUB_REPOSITORY"
       - run: echo "$GITHUB_SHA"
       - run: echo "$GITHUB_HEAD_REF"
-      
+      - run: echo "$USER"
+      - run: echo "$HOME"
+      - run: echo "$(id)"
+
       - run: cat $GITHUB_EVENT_PATH
-        
+
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
