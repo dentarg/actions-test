@@ -18,6 +18,12 @@ jobs:
       - run: echo "$USER"
       - run: echo "$HOME"
       - run: echo "$(id)"
+      - run: echo "${USER}"
+      - name: USER test2
+        run: |
+          echo tut1
+          echo ${USER}
+          echo tut2
 
       - run: cat $GITHUB_EVENT_PATH
 
