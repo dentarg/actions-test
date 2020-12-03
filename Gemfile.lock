@@ -1,8 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    pg (1.2.2)
-    sequel (5.29.0)
+    pg (1.2.3)
+    sequel (5.39.0)
 
 PLATFORMS
   ruby
@@ -11,5 +11,8 @@ DEPENDENCIES
   pg
   sequel
 
+RUBY VERSION
+   ruby 2.7.2p137
+
 BUNDLED WITH
-   2.2.0.rc.1
+   2.1.4
