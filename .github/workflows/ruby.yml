@@ -6,6 +6,8 @@ on:
     - '.github/workflows/ruby.yml'
     - '.ruby-version'
     - 'bin/test'
+    - 'Gemfile'
+    - 'Gemfile.lock'
 
 jobs:
   build:
