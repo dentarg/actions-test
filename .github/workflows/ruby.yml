@@ -17,3 +17,4 @@ jobs:
     - run:  bundle -v
     - run:  gem -v
     - run:  bin/test
+    - run:  bundle install
