@@ -15,6 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
+      with:
+        bundler: "Gemfile.lock"
+        bundler-cache: true
     - run:  ruby -v
     - run:  bundle -v
     - run:  gem -v
