@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# echo commands
+set -x
+
+ruby -v
+bundle -v
+gem -v
