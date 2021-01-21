@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[[ -d /tmp ]] && echo "woho"
+
 # echo commands
 set -x
 
