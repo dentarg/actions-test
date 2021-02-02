@@ -8,6 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - id: info
+        run: echo "::set-output name=version::$(git describe)"
+      - run: echo "Latest version is ${{ info.version }}"
+
       - run: echo "$GITHUB_JOB"
       - run: echo "$GITHUB_ACTION"
       - run: echo "$GITHUB_RUN_ID"
