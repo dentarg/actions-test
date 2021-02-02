@@ -11,6 +11,7 @@ on:
 
 jobs:
   skip_check:
+    name: CI skipped?
     runs-on: ubuntu-latest
     if: |
       !(   contains(github.event.pull_request.title,  '[ci skip]')
