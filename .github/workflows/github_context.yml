@@ -10,7 +10,7 @@ jobs:
 
       - id: info
         run: echo "::set-output name=version::$(git describe)"
-      - run: echo "Latest version is ${{ info.version }}"
+      - run: echo "Latest version is ${{ steps.info.outputs.version }}"
 
       - run: echo "$GITHUB_JOB"
       - run: echo "$GITHUB_ACTION"
