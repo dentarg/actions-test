@@ -8,3 +8,5 @@ set -x
 ruby -v
 bundle -v
 gem -v
+
+echo tut
