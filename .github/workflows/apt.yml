@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Install libidn
-        run: sudo apt-get install libidn11-dev
+    - name: Install libidn
+      run: sudo apt-get install libidn11-dev
 
     # - run: cat /etc/apt/apt.conf.d/80-retries
     #   if: always()
