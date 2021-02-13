@@ -10,7 +10,7 @@ on:
     - 'Gemfile.lock'
 
 jobs:
-  2.0:
+  test_2_0:
     runs-on: ubuntu-latest
     strategy:
       matrix:
