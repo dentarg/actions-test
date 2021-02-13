@@ -10,19 +10,20 @@ on:
     - 'Gemfile.lock'
 
 jobs:
-  skip_check:
-    name: CI skipped?
+  2.0:
     runs-on: ubuntu-latest
-    if: |
-      !(   contains(github.event.pull_request.title,  '[ci skip]')
-        || contains(github.event.pull_request.title,  '[skip ci]')
-        || contains(github.event.head_commit.message, '[ci skip]')
-        || contains(github.event.head_commit.message, '[skip ci]'))
+    strategy:
+      matrix:
+        key: [foo, bar]
+    container:
+      image: ruby:2.0
+      env:
+        LANG: C.UTF-8
     steps:
-    - run: echo NOOP
-
+      - uses: actions/checkout@v2
+      - run: ruby -v
+      - run: bundle -v
   build:
-    needs: skip_check
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
