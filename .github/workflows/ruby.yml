@@ -23,6 +23,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: ruby -v
       - run: bundle -v
+      - run: echo $CI
   build:
     runs-on: ubuntu-latest
     steps:
