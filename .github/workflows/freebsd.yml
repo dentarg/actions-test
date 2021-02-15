@@ -1,0 +1,24 @@
+name: apt
+
+on:
+  push:
+    paths:
+    - '.github/workflows/freebsd.yml'
+
+jobs:
+  testfreebsd:
+    runs-on: macos-latest
+    name: A job to run test FreeBSD
+    steps:
+    - uses: actions/checkout@v2
+    - name: Test in FreeBSD
+      id: test
+      uses: vmactions/freebsd-vm@v0.1.2
+      with:
+        usesh: true
+        run: |
+          pwd
+          ls -lah
+          whoami
+          env
+          freebsd-version
