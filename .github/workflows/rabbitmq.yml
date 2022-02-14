@@ -18,7 +18,7 @@ jobs:
       rabbitmq:
         image: rabbitmq:latest
         ports:
-        - 5672/tcp
+        - 5672:5672
         # needed because the rabbitmq container does not provide a healthcheck
         options: >-
           --health-cmd "rabbitmqctl node_health_check"
