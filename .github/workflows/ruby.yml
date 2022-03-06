@@ -40,3 +40,8 @@ jobs:
     - run:  gem -v
     - run:  bin/test
     - run:  bundle install
+    - run:  ruby tut.rb
+    - name: ruby tut.rb with ENV
+      run:  ruby tut.rb
+      env:
+        AMQP_PORT: 1337
