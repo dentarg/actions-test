@@ -36,6 +36,7 @@ jobs:
         FOO="foo bar baz"
         echo "$FOO"
         touch "$FOO.txt"
+        ls -ahl
     - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
       with:
