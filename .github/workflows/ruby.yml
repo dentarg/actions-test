@@ -30,7 +30,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Testing
+      run: |
+        echo "::echo::on"
+        FOO="foo bar baz"
+        echo "$FOO"
+        touch "$FOO.txt"
+    - uses: actions/checkout@v3
     - uses: ruby/setup-ruby@v1
       with:
         bundler: "Gemfile.lock"
