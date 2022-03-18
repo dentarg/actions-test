@@ -10,6 +10,34 @@ jobs:
       - name: cat $GITHUB_EVENT_PATH
         run: cat $GITHUB_EVENT_PATH
 
+      - name: echo github.event.pull_request.head.repo.fork
+        run: echo "${{ github.event.pull_request.head.repo.fork }}"
+
+      - name: Dump github.event.pull_request.head.repo
+        env:
+          DEBUG_VAR: ${{ toJson(github.event.pull_request.head.repo) }}
+        run: echo "$DEBUG_VAR"
+
+      - name: Dump github.event.pull_request.head
+        env:
+          DEBUG_VAR: ${{ toJson(github.event.pull_request.head) }}
+        run: echo "$DEBUG_VAR"
+
+      - name: Dump github.event.pull_request
+        env:
+          DEBUG_VAR: ${{ toJson(github.event.pull_request) }}
+        run: echo "$DEBUG_VAR"
+
+      - name: Dump github.event
+        env:
+          DEBUG_VAR: ${{ toJson(github.event) }}
+        run: echo "$DEBUG_VAR"
+
+      - name: Dump the GitHub context
+        env:
+          THE_GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$THE_GITHUB_CONTEXT"
+
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
