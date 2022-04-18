@@ -2,7 +2,9 @@ name: github context
 
 on:
   workflow_dispatch:
-  push:
+  workflow_run:
+    workflows: [Ruby]
+    types: [completed]
 
 jobs:
   build:
