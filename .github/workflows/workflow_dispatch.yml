@@ -33,7 +33,7 @@ jobs:
     needs: set-matrix
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.matrix.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.set-matrix.outputs.matrix) }}
     timeout-minutes: 3
     steps:
       - name: Echo matrix values
