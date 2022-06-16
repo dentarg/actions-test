@@ -1,0 +1,30 @@
+name: Testing workflow_dispatch
+
+on:
+  repository_dispatch:
+    types: [foobar]
+  workflow_dispatch:
+    inputs:
+      foo:
+        description: 'Foo'
+        required: true
+        type: string 
+      bar:
+        description: 'Bar'
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        foo: ${{ github.event.client_payload.foos || inputs.foo }}
+        bar: ${{ github.event.client_payload.bars || inputs.bar }}
+    timeout-minutes: 3
+    steps:
+      - name: Echo matrix values
+        run: |
+          echo foo=${{ matrix.foo }}
+          echo bar=${{ matrix.bar }}
