@@ -15,25 +15,13 @@ on:
         type: string
 
 jobs:
-  set-matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - id: set-matrix
-        run: |
-          if test -z "${{ inputs.foo }}"
-          then
-            echo "::set-output name=matrix::{\"foo\":[\"${{ inputs.foo }}\"], \"bar\":[\"${{ inputs.bar }}\"]}"
-          else
-            echo "::set-output name=matrix::{\"foo\":[\"${{ github.event.client_payload.foos }}\"], \"bar\":[\"${{ github.event.client_payload.bars }}\"]}"
-          fi
   build:
     runs-on: ubuntu-latest
-    needs: set-matrix
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
+      matrix:
+        foo: ${{ github.event.client_payload.foos || fromJSON([\"inputs.foo\"]) }} 
+        bar: ${{ github.event.client_payload.bars || fromJSON([\"inputs.bar\"]) }} 
     timeout-minutes: 3
     steps:
       - name: Echo matrix values
