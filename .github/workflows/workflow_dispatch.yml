@@ -1,8 +1,6 @@
-name: Testing workflow_dispatch
+name: workflow_dispatch to repo dispatch
 
 on:
-  repository_dispatch:
-    types: [foobar]
   workflow_dispatch:
     inputs:
       foo:
@@ -15,28 +13,20 @@ on:
         type: string
 
 jobs:
-  set-matrix:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - id: set-matrix
-        run: |
-          if test -n "${{ inputs.foo }}"
-          then
-            echo ::set-output name=matrix::{\"foo\":[\"${{ inputs.foo }}\"], \"bar\":[\"${{ inputs.bar }}\"]}
-          else
-            echo ::set-output name=matrix::{\"foo\":${{ fromJSON(github.event.client_payload.foos) }}, \"bar\":${{ fromJSON(github.event.client_payload.bars) }}}
-          fi
   build:
+    name: inputs foo=${{ inputs.foo }} bar=${{ inputs.bar }}
     runs-on: ubuntu-latest
-    needs: set-matrix
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.set-matrix.outputs.matrix) }}
-    timeout-minutes: 3
     steps:
-      - name: Echo matrix values
+      - name: input values foo=${{ inputs.foo }} bar=${{ inputs.bar }}
         run: |
-          echo foo=${{ matrix.foo }}
-          echo bar=${{ matrix.bar }}
+          echo foo=${{ inputs.foo }}
+          echo bar=${{ inputs.bar }}
+      - name: dispatch
+        run: |
+          curl 
+            --silent \
+            --verbose \
+            --header "Accept: application/vnd.github.v3+json" \
+            --header "Authorization: token $GITHUB_TOKEN" \
+            https://api.github.com/repos/${{ github.repository }}/dispatches \
+            --data '{"event_type":"repo-dispatch","client_payload":{"foos":["${{ inputs.foo }}"],"bars":["${{ inputs.bar }}"]}}'
