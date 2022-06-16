@@ -22,6 +22,8 @@ jobs:
           echo foo=${{ inputs.foo }}
           echo bar=${{ inputs.bar }}
       - name: dispatch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           curl \
             --silent \
