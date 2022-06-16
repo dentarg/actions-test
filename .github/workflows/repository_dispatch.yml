@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    name: foo=${{ matrix.foo }} bar=${{ matrix.bar }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
