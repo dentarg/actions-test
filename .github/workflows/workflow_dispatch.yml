@@ -23,7 +23,7 @@ jobs:
           echo bar=${{ inputs.bar }}
       - name: dispatch
         run: |
-          curl 
+          curl \
             --silent \
             --verbose \
             --header "Accept: application/vnd.github.v3+json" \
