@@ -1,0 +1,19 @@
+name: Testing repository_dispatch
+
+on:
+  repository_dispatch:
+    types: [repo-dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        foo: ${{ github.event.client_payload.foos }} 
+        bar: ${{ github.event.client_payload.bars }} 
+    timeout-minutes: 3
+    steps:
+      - name: foo=${{ matrix.foo }} bar=${{ matrix.bar }}
+        run: |
+          echo foo=${{ matrix.foo }}
+          echo bar=${{ matrix.bar }}
