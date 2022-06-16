@@ -22,7 +22,7 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          if test -z "${{ inputs.foo }}"
+          if test -n "${{ inputs.foo }}"
           then
             matrix="{\"foo\":[\"${{ inputs.foo }}\"], \"bar\":[\"${{ inputs.bar }}\"]}"
           else
