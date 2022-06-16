@@ -20,8 +20,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        foo: ${{ github.event.client_payload.foos || fromJSON([\"inputs.foo\"]) }} 
-        bar: ${{ github.event.client_payload.bars || fromJSON([\"inputs.bar\"]) }} 
+        foo: ${{ github.event.client_payload.foos || fromJSON("[\"inputs.foo\"]") }} 
+        bar: ${{ github.event.client_payload.bars || fromJSON("[\"inputs.bar\"]") }} 
     timeout-minutes: 3
     steps:
       - name: Echo matrix values
