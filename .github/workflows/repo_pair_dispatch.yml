@@ -1,0 +1,19 @@
+name: Testing pairs
+
+on:
+  repository_dispatch:
+    types: [pair-dispatch]
+
+jobs:
+  build:
+    name: foo=${{ matrix.foo }} bar=${{ matrix.bar }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include: ${{ github.event.client_payload.pairs }}
+    timeout-minutes: 3
+    steps:
+      - name: foo=${{ matrix.foo }} bar=${{ matrix.bar }}
+        run: |
+          echo foo=${{ matrix.foo }}
+          echo bar=${{ matrix.bar }}
