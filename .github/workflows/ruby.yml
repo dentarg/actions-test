@@ -27,6 +27,9 @@ jobs:
       - run: ruby -e 'p RUBY_PLATFORM'
       - run: ruby -e 'p RUBY_DESCRIPTION'
       - run: bundle -v
+      - run: umask
+      - run: umask 0002
+      - run: umask
   build:
     runs-on: ubuntu-latest
     steps:
