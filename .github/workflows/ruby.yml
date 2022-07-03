@@ -53,6 +53,9 @@ jobs:
       env:
         AMQP_PORT: 1337
     - run: umask
-    - run: umask 0002
+    - name: umask testing
+      run: |
+        umask
+        umask 0002
+        umask
     - run: umask
-
