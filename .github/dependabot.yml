@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "18:51"
+      timezone: "Europe/Stockholm"
+    vendor: true
