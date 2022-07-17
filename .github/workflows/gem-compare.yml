@@ -17,4 +17,5 @@ jobs:
     steps:
       - uses: dentarg/gem-compare@vendor-gem-compare-gem
         with:
+          gemrc: gemrc_debug
           github-token: ${{ secrets.GITHUB_TOKEN }}
