@@ -32,3 +32,5 @@ Tut.new("amqp://localhost")
 puts
 puts 'Tut.new("amqps://localhost")'
 Tut.new("amqps://localhost")
+
+puts "Hello"
