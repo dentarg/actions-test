@@ -1,0 +1,20 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      CI: external
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: [3.1]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '${{ matrix.ruby }}'
+      - run: ruby ci.rb
