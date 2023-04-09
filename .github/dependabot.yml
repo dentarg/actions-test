@@ -7,3 +7,5 @@ updates:
       time: "18:51"
       timezone: "Europe/Stockholm"
     vendor: true
+    # Disable version updates for now
+    open-pull-requests-limit: 0
