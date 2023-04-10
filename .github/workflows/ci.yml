@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   ci:
-    runs-on: macos-13-arm64
+    runs-on: ${{ matrix.os }}
     env:
       CI: external
     continue-on-error: true
