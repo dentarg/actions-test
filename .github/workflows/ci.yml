@@ -4,13 +4,14 @@ on: [push]
 
 jobs:
   ci:
-    runs-on: ubuntu-latest
+    runs-on: macos-13-arm64
     env:
       CI: external
     continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
+        os: [macos-13-arm64, macos-13-x64]
         ruby: [3.1]
     steps:
       - uses: actions/checkout@v3
