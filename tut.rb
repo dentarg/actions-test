@@ -17,7 +17,6 @@ class Tut
     puts
   end
 
-
   def amqp_port_from_env
     port = ENV["AMQP_PORT"]
 
