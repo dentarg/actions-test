@@ -11,9 +11,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-12, macos-13]
+        os: [ubuntu-latest]
         ruby: [3.1]
     steps:
+      - run: docker-compose --version
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
