@@ -15,6 +15,7 @@ jobs:
         ruby: [3.1]
     steps:
       - run: docker-compose --version
+      - run: /usr/libexec/docker/cli-plugins/docker-compose --version
       - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
