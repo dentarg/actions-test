@@ -14,12 +14,10 @@ jobs:
         os: [ubuntu-latest]
         ruby: [3.1]
     steps:
-      - run: docker-compose --version
-      - run: /usr/libexec/docker/cli-plugins/docker-compose --version
-      - run: docker --version
-      - run: docker compose
-      - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '${{ matrix.ruby }}'
-      - run: ruby ci.rb
+      - run: ssh -V
+      - run: ssh -v localhost
+      #- uses: actions/checkout@v4
+      #- uses: ruby/setup-ruby@v1
+      #  with:
+      #    ruby-version: '${{ matrix.ruby }}'
+      #- run: ruby ci.rb
