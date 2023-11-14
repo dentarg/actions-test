@@ -15,5 +15,5 @@ updates:
       interval: weekly
     groups:
       actions:
-        dependency-type: "all"
+        dependency-type: "production"
 
