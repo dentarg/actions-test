@@ -14,7 +14,7 @@ DEPENDENCIES
   sequel
 
 RUBY VERSION
-   ruby 3.1.4p223
+   ruby 2.7.8p225
 
 BUNDLED WITH
-   2.5.1
+   2.4.10
