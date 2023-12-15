@@ -25,7 +25,7 @@ jobs:
       #     ssh -v localhost w
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
-       with:
-         bundler-cache: true
-         ruby-version: '${{ matrix.ruby }}'
+        with:
+          bundler-cache: true
+          ruby-version: '${{ matrix.ruby }}'
       - run: ruby ci.rb
