@@ -23,9 +23,17 @@ jobs:
       #     ssh-keyscan localhost >> ~/.ssh/known_hosts
       # - run: |
       #     ssh -v localhost w
+
       - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+
+      # - uses: ruby/setup-ruby@v1
+      #   with:
+      #     bundler-cache: true
+      #     ruby-version: '${{ matrix.ruby }}'
+      # - run: ruby ci.rb
+
+      - uses: actions/upload-artifact@v4
+        name: Upload artifact v4 test
         with:
-          bundler-cache: true
-          ruby-version: '${{ matrix.ruby }}'
-      - run: ruby ci.rb
+          name: workflows-${{ matrix.os }}
+          path: workflows
