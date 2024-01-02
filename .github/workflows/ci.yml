@@ -33,7 +33,13 @@ jobs:
       # - run: ruby ci.rb
 
       - uses: actions/upload-artifact@v4
-        name: Upload artifact v4 test
+        name: Upload artifact v4 test 1
         with:
           name: workflows-${{ matrix.os }}
           path: workflows
+
+      - uses: actions/upload-artifact@v4
+        name: Upload artifact v4 test 2 same name
+        with:
+          name: workflows-${{ matrix.os }}
+          path: bin
