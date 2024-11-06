@@ -3,16 +3,21 @@ name: CI
 on: [push]
 
 jobs:
-  ci:
+  ruby:
+    name: ruby ${{ matrix.ruby }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    env:
-      CI: external
     continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
-        ruby: [3.3]
+        os:
+          - ubuntu-latest
+        ruby:
+          - "2.7"
+          - "3.0"
+          - "3.1"
+          - "3.2"
+          - "3.3"
     steps:
       # - run: ssh -V
       # - run: |
@@ -25,21 +30,12 @@ jobs:
       #     ssh -v localhost w
 
       - uses: actions/checkout@v4
-
-      # - uses: ruby/setup-ruby@v1
-      #   with:
-      #     bundler-cache: true
-      #     ruby-version: '${{ matrix.ruby }}'
-      # - run: ruby ci.rb
-
-      - uses: actions/upload-artifact@v4
-        name: Upload artifact v4 test 1
+      - uses: ruby/setup-ruby@v1
         with:
-          name: workflows-${{ matrix.os }}
-          path: workflows
+          bundler-cache: true
+          ruby-version: ${{ matrix.ruby }}
 
-      - uses: actions/upload-artifact@v4
-        name: Upload artifact v4 test 2 same name
-        with:
-          name: workflows-${{ matrix.os }}
-          path: bin
+      - run: ruby --version
+      - run: bundler --version
+      - run: gem --version
+      - run: ruby ci.rb

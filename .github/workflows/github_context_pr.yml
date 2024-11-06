@@ -2,10 +2,6 @@ name: PR github context
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: [CI]
-    types: [completed]
-    branches: [main]
 
 jobs:
   build:
