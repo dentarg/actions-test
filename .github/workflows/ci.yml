@@ -13,7 +13,7 @@ jobs:
         os:
           - ubuntu-latest
         ruby:
-          - "3.4"
+          - jruby-head
         include:
           - { os: ubuntu-24.04-arm, ruby: 3.4 }
     steps:
