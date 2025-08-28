@@ -3,8 +3,6 @@ name: LavinMQ
 on:
   workflow_dispatch:
   push:
-    paths:
-    - '.github/workflows/lavinmq.yml'
 
 jobs:
   build:
