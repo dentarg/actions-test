@@ -1,0 +1,15 @@
+name: LavinMQ
+
+on:
+  push:
+    paths:
+    - '.github/workflows/lavinmq.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: cloudamqp/lavinmq-action@main
+      with:
+        version: 2.3.0
+    - run: echo $AMPQ_URL
