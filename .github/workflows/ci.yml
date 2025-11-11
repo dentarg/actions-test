@@ -13,9 +13,10 @@ jobs:
         os:
           - ubuntu-latest
         ruby:
-          - jruby-head
+          - ruby-head
         include:
-          - { os: ubuntu-24.04-arm, ruby: 3.4 }
+          - { os: ubuntu-22.04, ruby: 3.4 }
+          - { os: ubuntu-22.04, ruby: ruby-head }
     steps:
       # - run: ssh -V
       # - run: |
@@ -27,7 +28,7 @@ jobs:
       # - run: |
       #     ssh -v localhost w
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -36,3 +37,6 @@ jobs:
       - run: bundler --version
       - run: gem --version
       - run: ruby ci.rb
+      - run: ruby -v -e 'p RUBY_VERSION'
+      - run: |
+          ruby -v -e 'value_method = RUBY_VERSION >= "3.5.0dev" ? :value : :take; p value_method'
